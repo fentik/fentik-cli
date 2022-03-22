@@ -12,6 +12,6 @@ setup(
     install_requires=[
         'PrettyTable',
         'graphqlclient',
-	'yaml',
+	'PyYAML',
     ],
 )
