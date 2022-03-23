@@ -39,8 +39,8 @@ class InitCommand:
 
 
 class FentikClient:
-    # XXX(sst): proper handling for prod endpoint
-    BASE_URI = f"https://{getpass.getuser()}-api.ngrok.io/api/graphql"
+    API_SERVER = os.getenv('FENTIK_API_SERVER', "api.fentik.com")
+    BASE_URI = f"https://{API_SERVER}/api/graphql"
     _client = None
 
     def __init__(self, auth_manager):
