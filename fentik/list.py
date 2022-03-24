@@ -27,7 +27,8 @@ query GetSourceConfigs {
             result = []
         pt = PrettyTable()
         pt.field_names = ['Name', 'Databases', 'Type']
-        pt.add_rows([[r['name'], r['database'], r['sourceType']] for r in result])
+        pt.add_rows([[r['name'], r['database'], r['sourceType']]
+                    for r in result])
         return (
             pt.get_string()
             + "\n"
@@ -39,5 +40,6 @@ query GetSourceConfigs {
         print(result)
 
     def register_subparser(self, subparsers):
-        parser = subparsers.add_parser('list', help="List resources in Fentik.")
+        parser = subparsers.add_parser(
+            'list', help="List resources in Fentik.")
         parser.set_defaults(func=self._list)

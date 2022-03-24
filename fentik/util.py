@@ -39,18 +39,19 @@ class InitCommand:
 
 
 class FentikClient:
-    API_SERVER = os.getenv('FENTIK_API_SERVER', "api.fentik.com")
-    BASE_URI = f"https://{API_SERVER}/api/graphql"
     _client = None
+    _service_uri = None
 
     def __init__(self, auth_manager):
         self._auth_manager = auth_manager
+        self._service_uri = auth_manager.get_service_uri()
 
     def query(self, query):
         if not self._client:
             # delay initialization until first query in case we don't have
             # a token initialized yet
-            self._client = GraphQLClient(self.BASE_URI)
-            self._client.inject_token('Token ' + self._auth_manager.get_token())
+            self._client = GraphQLClient(self._service_uri)
+            self._client.inject_token(
+                'Token ' + self._auth_manager.get_token())
 
         return self._client.execute(query)

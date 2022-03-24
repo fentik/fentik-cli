@@ -7,6 +7,8 @@ import yaml
 class AuthTokenManager:
     CONFIG_FILE = ".fentik"
     TOKEN_KEY = "authtoken"
+    SERVICE_URI = "service_uri"
+    DEFAULT_SERVICE_URI = "https://api.fentik.com/api/graphql"
 
     def _config_file(self):
         home = expanduser("~")
@@ -24,6 +26,14 @@ class AuthTokenManager:
     def put_token(self, token):
         with open(self._config_file(), 'w') as f:
             yaml.dump({self.TOKEN_KEY: token}, f)
+
+    def get_service_uri(self):
+        try:
+            with open(self._config_file(), 'r') as f:
+                data = yaml.load(f, Loader=yaml.FullLoader)
+                return data[self.SERVICE_URI]
+        except Exception:
+            return self.DEFAULT_SERVICE_URI
 
     def _authtoken(self, args):
         token = args.token[0]
