@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='fentik',
-    version='0.0.2',
+    version='0.0.3',
     author="Fentik, Inc.",
     author_email="support@fentik.com",
     description="Real-time data platform for in product experiences",
