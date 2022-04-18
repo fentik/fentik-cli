@@ -5,6 +5,7 @@ from fentik.auth import AuthTokenManager
 from fentik.deploy import DeployCommand
 from fentik.list import ListCommand
 from fentik.clean import CleanCommand
+from fentik.status import StatusCommand
 from fentik.util import FentikClient, InitCommand
 
 
@@ -16,6 +17,7 @@ def main(args):
     list_command = ListCommand(client)
     deploy_command = DeployCommand(client)
     clean_command = CleanCommand(client)
+    status_command = StatusCommand(client)
 
     parser = argparse.ArgumentParser(
         description='Fentik: real time streaming data pipelines'
@@ -27,6 +29,7 @@ def main(args):
     list_command.register_subparser(subparsers)
     deploy_command.register_subparser(subparsers)
     clean_command.register_subparser(subparsers)
+    status_command.register_subparser(subparsers)
 
     if len(args) == 1:
         parser.print_help()
